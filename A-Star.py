@@ -49,12 +49,11 @@ def Asta():
     closed = []                                                     #liste des états parcourus qui est utilisé pour le traitement
     moves = []                                                      #liste des mouvement a faire
     state = board.copy()                                            #etat initial du board
-
     F = heur(state) + G
     père = np.zeros((3, 3), dtype=int)                              #on initialise le père de l'état initiale a une matrice de 0 (pour éviter certain cas d'out of range)
     open.append((state, F, G, père))                                #etat, F, G, père
-    print("Calcule en cours")
-    print("Wait....")
+    #print("Calcule en cours")
+    #print("Wait....")
     while len(open) > 0:
         open.sort(key=lambda tup: tup[1])           #on trie la liste en fonction de la valeur de F
 
@@ -86,13 +85,15 @@ def Asta():
             open.append((fils.copy(),F ,G, dad))                                            #on ajoute l'état courant a open
             fils[x][y], fils[emptyi][emptyj] = fils[emptyi][emptyj], fils[x][y]            #on reposition la case vide a sa position initial
 
-    print("Fin des calcule")
-    print("Début de l'affichage")
+    #print("Fin des calcule")
+    #print("Début de l'affichage")
     path= Path(closed)                      #on calcule le path
     cmp = len(path) - 1
     while cmp >= 0:
         draw(path[cmp])                     #affichage du pathing
         cmp -= 1
+    initB()
+    #print(board)
 
 def Equal(boardi, boardf):
     #Fonction qui vérifie si 2 matrice sont égaux
